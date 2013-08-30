@@ -23,6 +23,7 @@ def main():
         
     conf = DefaultConfigure()
     job = Job(conf)
+    job.set_splliter(LineSplitter)
     job.set_mapper(WordCountMapper)
     job.set_mapper_num(4)
     job.set_reducer(WordCountReducer)
