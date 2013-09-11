@@ -2,9 +2,9 @@ import os
 import json
 import multiprocessing
 
-from core.splitter import BaseSplitter, SmartLineSplitter
-from core.mapper import BaseMapper
-from core.reducer import BaseReducer
+from splitter import BaseSplitter, LineSplitter
+from mapper import BaseMapper
+from reducer import BaseReducer
 
 SPLITTER_CLASS = 'splitter_class'
 MAPPER_CLASS = 'mapper_class'
@@ -17,7 +17,7 @@ OUTPUT_PATH = 'output_path'
 class Configure(object):
     def __init__(self, conf_file):
         self.conf_map = {
-                SPLITTER_CLASS: SmartLineSplitter,
+                SPLITTER_CLASS: LineSplitter,
                 MAPPER_CLASS: None,
                 MAPPER_NUM: multiprocessing.cpu_count() + 1,
                 REDUCER_CLASS: None,
@@ -30,7 +30,7 @@ class Configure(object):
             logging.error('can not find the configure file: %s' % conf_file)
             return None
 
-        conf_dict = json.load(open(conf_file)):
+        conf_dict = json.load(open(conf_file))
         if SPLITTER_CLASS in conf_dict:
             self.conf_map[SPLITTER_CLASS] = conf_dict[SPLITTER_CLASS]
         if MAPPER_CLASS in conf_dict:
