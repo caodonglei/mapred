@@ -1,7 +1,7 @@
 import logging
 import inspect
 
-from collector import BaseCollector, DefaultCollector
+from collector import BaseCollector, DebugCollector
 
 class ReduceConfigureError(Exception):
     def __init__(self, msg):
@@ -63,7 +63,7 @@ class ReducerTemplate(BaseReducer):
 
 def test():
     inputs = {'key': ['value1', 'value2']}
-    dc = DefaultCollector()
+    dc = DebugCollector()
 
     class MyReducer(BaseReducer):
         def reduce(self, key, values, collector):

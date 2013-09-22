@@ -1,7 +1,7 @@
 import logging
 import inspect
 
-from collector import BaseCollector, DefaultCollector
+from collector import BaseCollector, DebugCollector
 
 class MapConfigureError(Exception):
     def __init__(self, msg):
@@ -63,7 +63,7 @@ class MapperTemplate(BaseMapper):
 
 def test():
     inputs = [('key', 'value')]
-    dc = DefaultCollector()
+    dc = DebugCollector()
 
     class MyMapper(BaseMapper):
         def map(self, key, value, collector):
